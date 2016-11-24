@@ -6,14 +6,17 @@ from nltk.tag import pos_tag
 import nltk
 import os
 
-# eyed3.log.setLevel("ERROR")
+eyed3.log.setLevel("ERROR")
+
+print "========= PRE TAG EDITING SCRIPT =========="
+print "This Script iterates over a given directory and tries to pre-edit the title and the album of the mp3 files."
+print "WARNING: This script could overwrite titles/ album names you have edited before."
+print
+directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
+# directory = "C:/Users/Sebastian/Desktop/Musik/"
 
 # Set english vocabs
 english_vocab = set(w.lower() for w in nltk.corpus.words.words())
-
-# directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
-
-directory = "C:/Users/Sebastian/Desktop/Musik/"
 
 def modify_string(str):
     str = str.replace("(", "[")

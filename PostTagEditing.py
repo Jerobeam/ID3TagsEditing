@@ -7,12 +7,15 @@ import re
 
 eyed3.log.setLevel("ERROR")
 
+print "========= POST TAG EDITING SCRIPT =========="
+print "This Script iterates over a given directory and structures mp3 and m4a files like directory/artist/album/song"
+print
+directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
+
+# directory = "C:/Users/Sebastian/Desktop/Musik/"
+
 errorcounter = 0
 retitledcounter = 0
-
-# directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
-
-directory = "C:/Users/Sebastian/Desktop/Musik/"
 
 title = None
 

@@ -3,11 +3,14 @@
 import eyed3
 import os
 
-# eyed3.log.setLevel("ERROR")
+eyed3.log.setLevel("ERROR")
 
-# directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
+print "========= SET TITLE SCRIPT =========="
+print "This Script iterates over a given directory and tries to fill in missing titles."
+print
+directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
 
-directory = "C:\Users\Sebastian\Desktop\Musik"
+# directory = "C:\Users\Sebastian\Desktop\Musik"
 
 version22counter = 0
 
