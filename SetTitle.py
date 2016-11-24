@@ -1,16 +1,19 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# encoding: Cp1252
 
 import eyed3
 import os
 
 # directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
 
-directory = "C:/Users/Sebastian/Desktop/Musik/"
+directory = "C:\Users\Sebastian\Desktop\Musik"
+
+version22counter = 0
 
 for dirName, subdirList, files in os.walk(directory, topdown=False):
     for fname in files:
+
         filepath = os.path.join(dirName, fname)
+        print filepath
 
         if fname.lower().endswith('.mp3'):
             mp3 = eyed3.load(filepath)
@@ -26,6 +29,11 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
             # edit title
             if title is None:
-                mp3.tag.title = u"" + os.path.splitext(fname)[0]
+                mp3.tag.title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
                 mp3.tag.save()
 
+        else:
+            version22counter += 1
+
+print("-----------")
+print "Amount of MP3 Files with ID3 V 2.2.0: ", version22counter
