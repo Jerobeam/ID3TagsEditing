@@ -30,10 +30,10 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
             # Try to fill title if possible (not working for ID3 V 2.2.0)
             if mp3.tag.version != (2, 2, 0):
-                if title is None:
+                if title is None or title == "":
                     mp3.tag.title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
                     title = mp3.tag.title
-                    retitledcounter += 0
+                    retitledcounter += 1
                     mp3.tag.save()
                     print("Retitled: " + fname.decode("Cp1252"))
 
@@ -72,10 +72,13 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
         if artist is not None and album is not None:
 
-            if not os.path.exists(directory + artist + "/" + album):
-                os.makedirs(directory + artist + "/" + album)
+            if not os.path.exists(directory + "\\" + artist + "\\" + album):
+                os.makedirs(directory + "\\" + artist + "\\" + album)
 
-            movePath = directory + artist + "\\" + album + "\\" + title + fileextension
+            movePath = directory + "\\" + artist + "\\" + album + "\\" + title + fileextension
+
+            # print filepath
+            # print movePath
 
             # Only move file when they are not in the right place
             if not movePath == filepath.decode("Cp1252"):
