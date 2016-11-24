@@ -30,11 +30,11 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             # Try to fill title if possible (not working for ID3 V 2.2.0)
             if mp3.tag.version != (2, 2, 0):
                 if title is None:
-                    mp3.tag.title = u"" + os.path.splitext(fname)[0]
+                    mp3.tag.title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
                     title = mp3.tag.title
                     mp3.tag.save()
                     retitledcounter += 0
-                    print("Retitled: " + fname)
+                    print("Retitled: " + fname.decode("Cp1252"))
 
         elif fname.lower().endswith('.m4a'):
             m4a = TinyTag.get(filepath)
@@ -44,10 +44,10 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             fileextension = ".m4a"
 
         if artist is None:
-            print("Error: No artist for Song " + os.path.splitext(fname)[0] + ".")
+            print("Error: No artist for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
         if album is None:
-            print("Error: No album for Song " + os.path.splitext(fname)[0] + ".")
+            print("Error: No album for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
         else:
             # Only regard first artist (don't regard featurings)
@@ -60,9 +60,9 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         #     newFileName = filename
 
         if title is None:
-            print("Error: No title for Song " + os.path.splitext(fname)[0] + ".")
+            print("Error: No title for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
-            title = os.path.splitext(fname)[0]
+            title = os.path.splitext(fname)[0].decode("Cp1252")
 
         if artist is not None and album is not None:
 
