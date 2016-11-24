@@ -43,34 +43,42 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             artist = m4a.artist
             album = m4a.album
             fileextension = ".m4a"
+        else:
+            continue
 
         if artist is None:
             print("Error: No artist for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
+        else:
+            # Only regard first artist (don't regard featurings)
+            artist = re.split(" +feat.", artist)[0]
+            artist = artist.replace("/", "_")
+            artist = artist.replace("\\", "_")
+
         if album is None:
             print("Error: No album for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
         else:
-            # Only regard first artist (don't regard featurings)
-            artist = re.split(" +feat.", artist)[0]
-
-            if not os.path.exists(directory + artist + "/" + album):
-                os.makedirs(directory + artist + "/" + album)
-
-        # if title != os.path.splitext(fname)[0] and title is not None:
-        #     newFileName = filename
+            album = album.replace("/", "_")
+            album = album.replace("\\", "_")
 
         if title is None:
             print("Error: No title for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
             title = os.path.splitext(fname)[0].decode("Cp1252")
+        else:
+            title = title.replace("/", "_")
+            title = title.replace("\\", "_")
 
         if artist is not None and album is not None:
+
+            if not os.path.exists(directory + artist + "/" + album):
+                os.makedirs(directory + artist + "/" + album)
 
             movePath = directory + artist + "\\" + album + "\\" + title + fileextension
 
             # Only move file when they are not in the right place
-            if not movePath == filepath:
+            if not movePath == filepath.decode("Cp1252"):
                 # Check if destination file already exists
                 if not os.path.isfile(movePath):
                     os.rename(filepath, movePath)
