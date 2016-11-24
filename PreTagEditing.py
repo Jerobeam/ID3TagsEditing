@@ -6,6 +6,8 @@ from nltk.tag import pos_tag
 import nltk
 import os
 
+# eyed3.log.setLevel("ERROR")
+
 # Set english vocabs
 english_vocab = set(w.lower() for w in nltk.corpus.words.words())
 
@@ -46,7 +48,6 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         # Try to edit tags if possible (not working for ID3 V 2.2.0)
         if mp3.tag.version != (2, 2, 0):
             title = mp3.tag.title
-            artist = mp3.tag.artist
             album = mp3.tag.album
 
             # edit title
