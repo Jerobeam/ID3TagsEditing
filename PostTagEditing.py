@@ -1,10 +1,11 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# encoding: Cp1252
 
 import eyed3
 from tinytag import TinyTag
 import os
 import re
+
+eyed3.log.setLevel("ERROR")
 
 errorcounter = 0
 retitledcounter = 0
@@ -32,8 +33,8 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
                 if title is None:
                     mp3.tag.title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
                     title = mp3.tag.title
-                    mp3.tag.save()
                     retitledcounter += 0
+                    mp3.tag.save()
                     print("Retitled: " + fname.decode("Cp1252"))
 
         elif fname.lower().endswith('.m4a'):
