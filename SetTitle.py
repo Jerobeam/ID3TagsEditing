@@ -27,13 +27,13 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             title = mp3.tag.title
 
             # edit title
-            if title is None:
+            if title is None or title == "":
                 mp3.tag.title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
                 mp3.tag.save()
 
         else:
             version22counter += 1
-            print "File with ID3 V 2.2.0 Tags found: " , filepath.decode("Cp1252")
+            print "File with ID3 V 2.2.0 Tags found: ", filepath.decode("Cp1252")
 
 print("-----------")
 print "Amount of MP3 Files with ID3 V 2.2.0: ", version22counter
