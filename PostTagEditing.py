@@ -90,9 +90,9 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
     if not files and not subdirList:
         os.rmdir(dirName)
 
-print("-----------")
-print("Amount of errors: ", errorcounter)
-print("Amount of retitlemend: ", retitledcounter)
+print "-----------"
+print "Amount of errors: ", errorcounter
+print "Amount of retitlements: ", retitledcounter
 
 # For later purpose: Set album cover
 # imagedata = open("D:\Bilder\Saved Pictures\Just do it Shia.jpg","rb").read()
