@@ -51,7 +51,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
             # edit title
             if title is None:
-                title = u"" + os.path.splitext(fname)[0]
+                title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
 
             title = modify_string(title)
 
