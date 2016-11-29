@@ -38,6 +38,8 @@ def modify_string(str):
         str = str.rstrip()
     return str
 
+version22counter = 0
+
 for dirName, subdirList, files in os.walk(directory, topdown=False):
     for fname in files:
         filepath = os.path.join(dirName, fname)
@@ -52,6 +54,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         if mp3.tag.version != (2, 2, 0):
             title = mp3.tag.title
             album = mp3.tag.album
+            artist = mp3.tag.artist
 
             # edit title
             if title is None:
@@ -68,5 +71,16 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             else:
                 mp3.tag.album = u"" + title
 
+            # edit artist
+            artist = artist.replace("Feat.", "feat.")
+            mp3.tag.artist = artist
+
+            # save edited tags
             mp3.tag.save()
 
+        else:
+            version22counter += 1
+            print "File with ID3 V 2.2.0 Tags found: ", filepath.decode("Cp1252")
+
+print("-----------")
+print "Amount of MP3 Files with ID3 V 2.2.0: ", version22counter
