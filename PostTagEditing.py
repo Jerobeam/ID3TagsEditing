@@ -9,6 +9,7 @@ eyed3.log.setLevel("ERROR")
 
 print "========= POST TAG EDITING SCRIPT =========="
 print "This Script iterates over a given directory and structures mp3 and m4a files like directory/artist/album/song"
+print "WARNING: This script deletes album covers found by iTunes."
 print
 directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
 
@@ -57,6 +58,10 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             artist = re.split(" +feat.", artist)[0]
             artist = artist.replace("/", "_")
             artist = artist.replace("\\", "_")
+            artist = artist.replace(":", "")
+            artist = artist.replace("\"", "")
+            artist = artist.replace("???", "Fragezeichen")
+            artist = artist.replace("?", "")
 
         if album is None:
             print("Error: No album for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
@@ -64,6 +69,9 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         else:
             album = album.replace("/", "_")
             album = album.replace("\\", "_")
+            album = album.replace(":", "")
+            album = album.replace("\"", "")
+            album = album.replace("?", "")
 
         if title is None:
             print("Error: No title for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
@@ -72,6 +80,9 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         else:
             title = title.replace("/", "_")
             title = title.replace("\\", "_")
+            title = title.replace(":", "")
+            title = title.replace("\"", "")
+            title = title.replace("?", "")
 
         if artist is not None and album is not None:
 
