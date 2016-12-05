@@ -22,11 +22,19 @@ english_vocab = set(w.lower() for w in nltk.corpus.words.words())
 def modify_string(str):
     str = str.replace("(", "[")
     str = str.replace(")", "]")
+    str = str.replace("[Explicit]","")
+    str = str.replace("[explicit]","")
 
     # check if str is english
     if str.split()[0].lower() in english_vocab:
+        print "______"
+        print str
+        str = str.lower()
+        str = str.capitalize()
         tagged_sent = pos_tag(str.split())
-        propernouns = [word for word, pos in tagged_sent if pos == 'NN' or pos == 'NNS' or pos == 'JJR' or pos == 'NNP']
+        print tagged_sent
+        propernouns = [word for word, pos in tagged_sent if pos == 'NN' or pos == 'NNS' or pos == 'JJR']
+        print propernouns
 
         str = ""
         for word, pos in tagged_sent:
