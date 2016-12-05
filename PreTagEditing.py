@@ -35,8 +35,10 @@ def modify_string(str):
 
             str += word + " "
 
-        # Delete ending whitespaces
-        str = str.rstrip()
+        # Delete ending and beginning whitespaces
+        str = str.strip()
+
+        print str
     return str
 
 version22counter = 0
@@ -56,6 +58,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             title = mp3.tag.title
             album = mp3.tag.album
             artist = mp3.tag.artist
+            album_artist = mp3.tag.album_artist
 
             # edit title
             if title is None:
