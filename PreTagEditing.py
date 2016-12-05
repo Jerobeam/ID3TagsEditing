@@ -5,6 +5,7 @@ import eyed3
 from nltk.tag import pos_tag
 import nltk
 import os
+import re
 
 eyed3.log.setLevel("ERROR")
 
@@ -74,6 +75,10 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             # edit artist
             artist = artist.replace("Feat.", "feat.")
             mp3.tag.artist = artist
+
+            # edit album artist
+            if not ("Remix" in title and "remix" in title) and (album_artist is None or album_artist is ""):
+                mp3.tag.album_artist = re.split(" +feat.", artist)[0]
 
             # save edited tags
             mp3.tag.save()
