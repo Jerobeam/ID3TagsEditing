@@ -13,12 +13,24 @@ print "WARNING: This script deletes album covers found by iTunes."
 print
 directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
 
-# directory = "C:/Users/Sebastian/Desktop/Musik/"
+# directory = "C:/Users/Sebastian/Desktop/Testmusik/"
 
 errorcounter = 0
 retitledcounter = 0
 
 title = None
+
+def modify_string(str):
+    str = str.replace("/", "_")
+    str = str.replace("\\", "_")
+    str = str.replace(":", "")
+    str = str.replace("\"", "")
+    str = str.replace("drei ???", "drei Fragezeichen")
+    str = str.replace("?", "")
+    str = str.replace("<", "")
+    str = str.replace(">", "")
+    str = str.strip()
+    return str
 
 for dirName, subdirList, files in os.walk(directory, topdown=False):
     for fname in files:
@@ -56,33 +68,20 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         else:
             # Only regard first artist (don't regard featurings)
             artist = re.split(" +feat.", artist)[0]
-            artist = artist.replace("/", "_")
-            artist = artist.replace("\\", "_")
-            artist = artist.replace(":", "")
-            artist = artist.replace("\"", "")
-            artist = artist.replace("???", "Fragezeichen")
-            artist = artist.replace("?", "")
+            artist = modify_string(artist)
 
         if album is None:
             print("Error: No album for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
         else:
-            album = album.replace("/", "_")
-            album = album.replace("\\", "_")
-            album = album.replace(":", "")
-            album = album.replace("\"", "")
-            album = album.replace("?", "")
+            album = modify_string(album)
 
         if title is None:
             print("Error: No title for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
             title = os.path.splitext(fname)[0].decode("Cp1252")
         else:
-            title = title.replace("/", "_")
-            title = title.replace("\\", "_")
-            title = title.replace(":", "")
-            title = title.replace("\"", "")
-            title = title.replace("?", "")
+            title = modify_string(title)
 
         if artist is not None and album is not None:
 
@@ -91,8 +90,9 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
             movePath = directory + "\\" + artist + "\\" + album + "\\" + title + fileextension
 
-            # print filepath
-            # print movePath
+            print "_____"
+            print filepath
+            print movePath
 
             # Only move file when they are not in the right place
             if not movePath == filepath.decode("Cp1252"):
