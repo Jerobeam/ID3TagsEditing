@@ -28,7 +28,6 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
         # Try to edit tags if possible (not working for ID3 V 2.2.0)
         if mp3.tag.version != (2, 2, 0):
             title = mp3.tag.title
-            print title
 
             # edit title
             if title is None or title == "":
