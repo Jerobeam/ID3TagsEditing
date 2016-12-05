@@ -79,14 +79,14 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             artist = modify_string(artist)
 
         if album is None:
-            print("Error: No album for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
+            print("ERROR: No album for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
         else:
             album = modify_string(album)
 
         if title is None:
-            print("Error: No title for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
-            errorcounter += 1
+            print("WARNING: No title for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ". Using filename.")
+            notitlecounter += 1
             title = os.path.splitext(fname)[0].decode("Cp1252")
         else:
             title = modify_string(title)
@@ -118,6 +118,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 print "-----------"
 print "Amount of errors: ", errorcounter
 print "Amount of retitlements: ", retitledcounter
+print "Amount of songs without a title: ", notitlecounter
 
 # For later purpose: Set album cover
 # imagedata = open("D:\Bilder\Saved Pictures\Just do it Shia.jpg","rb").read()
