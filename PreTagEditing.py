@@ -14,6 +14,8 @@ print "This Script iterates over a given directory and tries to pre-edit the tit
 print "WARNING: This script could overwrite titles/ album names you have edited before."
 print
 directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
+print "==========================================="
+print
 # directory = "C:/Users/Sebastian/Desktop/Musik/"
 
 # Set english vocabs

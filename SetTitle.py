@@ -9,7 +9,8 @@ print "========= SET TITLE SCRIPT =========="
 print "This Script iterates over a given directory and tries to fill in missing titles."
 print
 directory = raw_input("Please provide the filepath to the folder in which the mp3 files should be edited: ")
-
+print "====================================="
+print
 # directory = "C:\Users\Sebastian\Desktop\Musik"
 
 version22counter = 0
