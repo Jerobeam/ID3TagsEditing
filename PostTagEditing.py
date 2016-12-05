@@ -42,6 +42,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             artist = mp3.tag.artist
             album = mp3.tag.album
             genre = mp3.tag.genre
+            album_artist = mp3.tag.album_artist
             fileextension = ".mp3"
 
             # Try to fill title if possible (not working for ID3 V 2.2.0)
@@ -50,8 +51,13 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
                     mp3.tag.title = u"" + os.path.splitext(fname)[0].decode("Cp1252")
                     title = mp3.tag.title
                     retitledcounter += 1
-                    mp3.tag.save()
                     print("Retitled: " + fname.decode("Cp1252"))
+
+                # edit album artist
+                if not("Remix" in title and "remix" in title) and (album_artist is None or album_artist is ""):
+                    mp3.tag.album_artist = re.split(" +feat.", artist)[0]
+
+                mp3.tag.save()
 
         elif fname.lower().endswith('.m4a'):
             m4a = TinyTag.get(filepath)
