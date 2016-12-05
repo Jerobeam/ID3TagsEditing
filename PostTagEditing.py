@@ -11,11 +11,13 @@ print "========= POST TAG EDITING SCRIPT =========="
 print "This Script iterates over a given directory and structures mp3 and m4a files like directory/artist/album/song"
 print "WARNING: This script deletes album covers found by iTunes."
 print
-directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
-
-# directory = "C:/Users/Sebastian/Desktop/Testmusik/"
+# directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
+print "============================================"
+print
+directory = "C:/Users/Sebastian/Desktop/Testmusik/"
 
 errorcounter = 0
+notitlecounter = 0
 retitledcounter = 0
 
 title = None
@@ -69,7 +71,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
             continue
 
         if artist is None:
-            print("Error: No artist for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
+            print("ERROR: No artist for Song " + os.path.splitext(fname)[0].decode("Cp1252") + ".")
             errorcounter += 1
         else:
             # Only regard first artist (don't regard featurings)
@@ -96,7 +98,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
             movePath = directory + "\\" + artist + "\\" + album + "\\" + title + fileextension
 
-            print "_____"
+            print "___________"
             print filepath
             print movePath
 
@@ -106,7 +108,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
                 if not os.path.isfile(movePath):
                     os.rename(filepath, movePath)
                 else:
-                    print("Error: File " + movePath + " already existing.")
+                    print("ERROR: File " + movePath + " already existing.")
                     errorcounter += 1
 
     # Remove directories without any content
