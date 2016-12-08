@@ -11,10 +11,10 @@ print "========= POST TAG EDITING SCRIPT =========="
 print "This Script iterates over a given directory and structures mp3 and m4a files like directory/artist/album/song"
 print "WARNING: This script deletes album covers found by iTunes."
 print
-# directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
+directory = raw_input("Please provide the filepath to the folder, you want to restructure: ")
 print "============================================"
 print
-directory = "C:/Users/Sebastian/Desktop/Testmusik/"
+# directory = "C:/Users/Sebastian/Desktop/Testmusik/"
 
 errorcounter = 0
 notitlecounter = 0
@@ -31,6 +31,7 @@ def modify_string(str):
     str = str.replace("?", "")
     str = str.replace("<", "")
     str = str.replace(">", "")
+    str = str.replace("*", "_")
     str = str.strip()
     return str
 
