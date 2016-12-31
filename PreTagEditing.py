@@ -22,59 +22,78 @@ print
 english_vocab = set(w.lower() for w in nltk.corpus.words.words())
 
 def replace_string(str):
-    # Replace certain symbols
-    str = str.replace("(", "[")
-    str = str.replace(")", "]")
-    # Delete certain string occurences
-    str = str.replace("[Explicit]", "")
-    str = str.replace("[explicit]", "")
-    str = str.replace("[Explicit Album Version]", "")
-    str = str.replace("[explicit Album Version]", "")
-    str = str.replace("[explicit album Version]", "")
-    str = str.replace("[Datpiff Exclusive]", "")
-    str = str.replace("[datpiff Exclusive]", "")
-    str = str.replace("[DatPiff Exclusive]", "")
-    str = str.replace("- single", "")
-    str = str.replace("- Single", "")
-    # Replace wrong artist occurences
-    str = str. replace("Schoolboy Q", "ScHoolBoy Q")
-    str = str. replace("SchoolBoy Q", "ScHoolBoy Q")
-    str = str. replace("ScHoolboy Q", "ScHoolBoy Q")
-    str = str.replace("CHIEF KEEF", "Chief Keef")
-    # Replace wrong "Remix" occurences
-    str = str.replace("remix", "Remix")
-    str = str.replace("RMX", "Remix")
-    str = str.replace("rmx", "Remix")
-    # Replace wrong "feat." occurences
-    str = str.replace("feat", "feat.")
-    str = str.replace("Feat", "feat.")
-    str = str.replace(" ft", " feat.")
-    str = str.replace(" Ft", " feat.")
-    str = str.replace("Feat.", "feat.")
-    str = str.replace("ft.", "feat.")
-    str = str.replace("Ft.", "feat.")
-    str = str.replace("feat..", "feat.")
-    str = str.replace("Feat..", "feat.")
-    str = str.replace("ft..", "feat.")
-    str = str.replace("Ft..", "feat.")
-    # English fixes
-    str = str.replace("Dont", "Don't")
-    str = str.replace("dont", "don't")
-    str = str.replace("Aint", "Ain't")
-    str = str.replace("aint", "ain't")
-    str = str.replace("Thats", "That's")
-    str = str.replace("thats", "that's")
-    str = str.replace("swag", "Swag")
-    str = str.replace("i'm", "I'm")
-    # Replace Prod to delete it afterwards
-    str = str.replace("[prod", "[Prod")
-    str = str.replace("prod ", "[Prod ")
-    str = str.replace("PROD ", "[Prod ")
-    str = str.replace("Prod ", "[Prod ")
-    if "[Prod" in str:
-        str = str.split("[Prod")[0]
+    if not(str is None or str == ""):
+        # Replace certain symbols
+        str = str.replace("(", "[")
+        str = str.replace(")", "]")
+        # Delete certain string occurences
+        str = str.replace("[Explicit]", "")
+        str = str.replace("[explicit]", "")
+        str = str.replace("[Explicit Album Version]", "")
+        str = str.replace("[explicit Album Version]", "")
+        str = str.replace("[explicit album Version]", "")
+        str = str.replace("[Datpiff Exclusive]", "")
+        str = str.replace("[datpiff Exclusive]", "")
+        str = str.replace("[DatPiff Exclusive]", "")
+        str = str.replace("[ToneDen Exclusive]", "")
+        str = str.replace("[Original Mix]", "")
+        str = str.replace("[Original mix]", "")
+        str = str.replace("- single", "")
+        str = str.replace("- Single", "")
+        # Replace wrong artist occurences
+        str = str. replace("Schoolboy Q", "ScHoolBoy Q")
+        str = str. replace("SchoolBoy Q", "ScHoolBoy Q")
+        str = str. replace("ScHoolboy Q", "ScHoolBoy Q")
+        str = str.replace("CHIEF KEEF", "Chief Keef")
+        str = str.replace("ASAP Rocky", "A$AP Rocky")
+        str = str.replace("Travis Scott", "Travi$ Scott")
+        # Replace wrong "Remix" occurences
+        str = str.replace("remix", "Remix")
+        str = str.replace("RMX", "Remix")
+        str = str.replace("rmx", "Remix")
+        # Replace wrong "feat." occurences
+        str = str.replace("feat", "feat.")
+        str = str.replace("Feat", "feat.")
+        str = str.replace(" ft", " feat.")
+        str = str.replace(" Ft", " feat.")
+        str = str.replace("Feat.", "feat.")
+        str = str.replace("ft.", "feat.")
+        str = str.replace("Ft.", "feat.")
+        str = str.replace("feat..", "feat.")
+        str = str.replace("Feat..", "feat.")
+        str = str.replace("ft..", "feat.")
+        str = str.replace("Ft..", "feat.")
+        # English fixes
+        str = str.replace("Dont", "Don't")
+        str = str.replace("dont", "don't")
+        str = str.replace("Aint ", "Ain't ")
+        str = str.replace("aint ", "ain't ")
+        str = str.replace("Thats", "That's")
+        str = str.replace("thats", "that's")
+        str = str.replace("swag", "Swag")
+        str = str.replace("i'm", "I'm")
+        str = str.replace("pt ", "Pt. ")
+        str = str.replace("pt.", "Pt.")
+        str = str.replace("Pt ", "Pt. ")
+        str = str.replace("Dr ", "Dr. ")
+        str = str.replace("DJ ", "Dj ")
+        str = str.replace(" Da", " da")
+        str = str.replace(" Ep", " EP")
+        str = str.replace("vip ", "VIP ")
+        str = str.replace("Vip ", "VIP ")
+        # German fixes
+        str = str.replace(" Dich", " dich")
+        str = str.replace(" Ich", " ich")
+        str = str.replace(" Du", " du")
+        # Replace Prod to delete it afterwards
+        str = str.replace("[prod", "[Prod")
+        str = str.replace("prod ", "[Prod ")
+        str = str.replace("PROD ", "[Prod ")
+        str = str.replace("Prod ", "[Prod ")
+        if "[Prod" in str:
+            str = str.split("[Prod")[0]
 
-    str = str.strip()
+        str = str.strip()
 
     return str
 
@@ -95,7 +114,7 @@ def capitalize_nouns(str):
 
         str = ""
         for word, pos in tagged_sent:
-            if word in propernouns or 'dj' in word:
+            if word in propernouns:
                 word = word.title()
 
             str += word + " "
@@ -129,7 +148,7 @@ def remove_artist_parts(str):
     return str
 
 def append_aritst_parts(artist, artistPt):
-    if artistPt is not None:
+    if not (artistPt is None or artistPt == "") and not (artist is None or artist == ""):
         if "feat." in artist:
             if "&" not in artistPt:
                 artist = artist + " & " + artistPt
@@ -138,7 +157,7 @@ def append_aritst_parts(artist, artistPt):
         else:
             artist = artist + " feat. " + artistPt
 
-    artist = artist.strip()
+        artist = artist.strip()
     return artist
 
 version22counter = 0
@@ -176,16 +195,18 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
                 newAlbum = newTitle
             else:
                 newAlbum = oldAlbum
+            # set artist
+            newArtist = oldArtist
             # set album artist
-            if not ("Remix" in newTitle) and (album_artist is None or album_artist is ""):
+            if not ("Remix" in newTitle) and (album_artist is None or album_artist is "") and not (newArtist is None or newArtist is ""):
                 mp3.tag.album_artist = re.split(" +feat.", newArtist)[0]
 
             ####################
             # replace certain values
             ####################
             newTitle = replace_string(newTitle)
-            newAlbum = replace_string(oldAlbum)
-            newArtist = replace_string(oldArtist)
+            newAlbum = replace_string(newAlbum)
+            newArtist = replace_string(newArtist)
 
             ####################
             # extract & remove featurings and append them to artist
