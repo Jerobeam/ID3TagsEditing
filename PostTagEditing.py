@@ -32,6 +32,7 @@ def modify_string(str):
     str = str.replace("<", "")
     str = str.replace(">", "")
     str = str.replace("*", "_")
+    str = str.replace("|", "_")
     str = str.strip()
     return str
 
