@@ -62,6 +62,7 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
                     mp3.tag.album_artist = re.split(" +feat.", artist)[0]
 
                 mp3.tag.save()
+                print mp3._tag._chapters._fs
 
         elif fname.lower().endswith('.m4a'):
             m4a = TinyTag.get(filepath)
