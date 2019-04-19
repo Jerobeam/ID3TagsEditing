@@ -59,7 +59,8 @@ for dirName, subdirList, files in os.walk(directory, topdown=False):
 
                 # edit album artist
                 if not("Remix" in title and "remix" in title) and (album_artist is None or album_artist is ""):
-                    mp3.tag.album_artist = re.split(" +feat.", artist)[0]
+                    if  artist is not None:
+                        mp3.tag.album_artist = re.split(" +feat.", artist)[0]
 
                 mp3.tag.save()
                 print mp3._tag._chapters._fs
